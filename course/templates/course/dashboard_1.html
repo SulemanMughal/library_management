@@ -1,0 +1,69 @@
+{% extends "Base.html" %}
+
+
+{% load static %}
+
+{% load countStock  %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    
+  </style>
+
+<div class="container-fluid">
+    <div class="row">
+  
+
+  
+        <h2>Book Information</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                
+                <th>Title</th>
+                <th>Author</th>
+                <th>Edition</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in issueBooks %}
+              <tr>
+                
+                <td><a href="{% url 'book_information' i.id %}">{{ i.book.book.title }}</a></td>
+                <td>{{ i.book.book.author }}</td>
+                <td>{{ i.book.book.edition }}</td>
+                <td>{{ i.id|countStock }}<a href="{% url 'return_Book' i.book.serialNumber %}">Return Book</a> </td>                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        </div>
+      
+    </div>
+  </div>
+
+{% endblock %}

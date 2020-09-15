@@ -1,0 +1,112 @@
+{% extends "Base.html" %}
+{% load static %}
+{% block title %}Registration{% endblock %}
+
+
+
+
+    {% block content %}
+
+    <style>
+     input::-webkit-inner-spin-button, input::-webkit-outer-spin-button{ -webkit-appearance:none; } input[type="number"]{ -moz-appearance:textfield; }
+    </style>
+    <br>
+    <div class="container">
+        <center>
+            <div class="card" style="width: 22rem;">
+                    <div class="card-header text-center">
+                            Registration Form
+                    </div>
+                          {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger alert-dismissible">
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                            <strong>{{ error|escape }}</strong>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% if form_2.errors %}
+                            {% for field in form_2 %}
+                                {% for error in field.errors %}
+                                    <div class="alert alert-danger alert-dismissible">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <strong>{{ error|escape }}</strong>
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
+                        {% endif %}
+            
+                    
+                    <div class="card-body">
+                            <form action="{% url 'user_create' %}" method="POST" enctype="multipart/form-data" >
+                                    {% csrf_token %}
+                                
+                                    <div class="form-group">
+                                        <label for="id_username">Username</label>
+                                        <input  class="form-control" type="text" name="username" maxlength="150" required id="id_username" aria-describedby="usernameHelp" placeholder="Enter Username">
+                                        <small id="usernameHelp" class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_first_name">First name</label>
+                                        <input  class="form-control" type="text" name="first_name" maxlength="30" id="id_first_name" aria-describedby="firstHelp" placeholder="Enter First Name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_last_name">Last name</label>
+                                        <input  class="form-control" type="text" name="last_name" maxlength="150" id="id_last_name" aria-describedby="lastHelp" placeholder="Enter Last Name">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_password">Password</label>
+                                        <input class="form-control" type="password" name="password" required id="id_password" placeholder="Password">
+                                        <small id="usernameHelp" class="form-text text-muted"><ul><li>Your password can&#39;t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can&#39;t be a commonly used password.</li><li>Your password can&#39;t be entirely numeric.</li></ul></small>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="id_password2">Repeat Password</label>
+                                        <input class="form-control" type="password" name="password2" required id="id_password2" placeholder="Repeat Password">
+                                        <small id="usernameHelp" class="form-text text-muted">Both Passwords should be same.</small>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="id_email">Email address</label>
+                                        <input  class="form-control" type="text" name="email" required id="id_email" aria-describedby="emailHelp" placeholder="Enter email">
+                                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                      </div>
+
+
+                                      <div class="form-group">
+                                        <label for="id_contactNumber">Contact Number</label>
+                                        <input  class="form-control" type="text" name="contactNumber" maxlength="20" required id="id_contactNumber" aria-describedby="emailHelp" placeholder="Enter contact number">
+                                      </div>
+
+
+                                      <div class="form-group">
+                                        <label for="id_rollNo">Registration Number</label>
+                                        <input  class="form-control" type="text" name="rollNo" maxlength="20" required id="id_rollNo" aria-describedby="emailHelp" placeholder="Enter registration number">
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="id_profileImage">Upload Profile Image</label>
+                                        <input  class="form-control-file"  type="file" name="profileImage" accept="image/*" required id="id_profileImage" id="exampleFormControlFile1">
+                                      </div>
+
+
+                                    <center>
+                                            <button type="submit" class="btn btn-primary" value="Sign-Up">Create User Profile</button>
+                                        </center>
+                                </form>
+                    
+                    </div>
+            </div>
+        
+        </center>
+        </div>
+
+        <br>
+{% endblock content %}

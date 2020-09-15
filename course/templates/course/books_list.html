@@ -1,0 +1,82 @@
+{% extends "Base.html" %}
+
+
+{% load static %}
+
+{% load countStock %}
+
+{% block title %}Books{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    
+  </style>
+
+<div class="container-fluid">
+    
+      <!-- <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+          
+        </div> -->
+  
+
+  <br>
+  
+
+        <h2>Library Books Information</h2>
+        {% if request.user.is_superuser %}
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <a class="btn btn-primary" href="#">Add Books</a>
+        </div>
+        {% endif %}
+        <br>
+        
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                
+                <th>Title</th>
+                <th>Author</th>
+                <th>Edition</th>
+                <th>Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in books %}
+              <tr>
+                
+                <td><a href="{% url 'book_information' i.id %}">{{ i.title }}</a></td>
+                <td>{{ i.author }}</td>
+                <td>{{ i.edition }}</td>
+                <td>{{ i.id|countStock }}</td>                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'Base.html' %}
+{% load static %}
+{% block title %} Edit Profile {% endblock %}
+{% block content %}
+
+<br>
+<br>
+    <div class="container">
+        <center>
+            <div class="card" style="width: 22rem;" >
+                <div class="card-header">Edit Profile</div>
+                {% if form_1.errors %}
+                    {% for field in form_1 %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible" style = "padding-bottom: 0px;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                {% if form_2.errors %}
+                    {% for field in form_2 %}
+                        {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissible" style = "padding-bottom: 0px;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                        </div>
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+                <div class="card-body">
+                    <form action="." method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_1.as_p }}
+                    {{ form_2.as_p }}
+                    <input type="hidden" name="password" value="{{ request.user.password }}" id="id_password">
+                    <button type="submit" class="btn btn-primary" value="Edit Profile">Edit Profile</button>
+                    </form>
+                    <br>
+                    <a href="{% url 'change_password' %}">Change Password</a>
+                    
+                </div>
+            </div>
+        </center>
+    </div>
+    <br>
+    <br>
+{% endblock content %}

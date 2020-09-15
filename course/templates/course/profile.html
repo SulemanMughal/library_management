@@ -1,0 +1,63 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% block title %}{{ request.user.username }}{% endblock %}
+
+
+{%  block content %}
+
+<br>
+<br>
+
+<center>
+    <div class="container">
+
+    
+    <div class="card" style="width: 25rem;">
+        <img class="card-img-top" src="/media/{{ profile.profileImage }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ user.username }}</h5>
+            <table class="table">
+                    
+                    <tbody>
+
+                        
+                            <tr>
+                        
+                                    <td>Full Name</td>
+                                    <td>{{ user.first_name }} {{ user.last_name }}</td>
+                                    
+                                  </tr>
+                            <tr>
+                        
+                                    <td>Registration Number</td>
+                                    <td>{{ profile.rollNo }}</td>
+                                    
+                                  </tr>
+                      
+                      
+                      <tr>
+                        
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                        
+                      </tr>
+                      <tr>
+                        
+                        <td>Contact Number</td>
+                        <td>{{ profile.contactNumber }}</td>
+                        
+                      </tr>
+                    </tbody>
+                  </table>
+                
+            
+        </div>
+        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Information</a>
+    </div>
+</div>
+</center>
+<br>
+<br>
+{% endblock %}

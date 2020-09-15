@@ -1,0 +1,40 @@
+{% extends 'Base.html' %}
+
+{% load static %}
+
+{% load statusFind %}
+
+{% block title %}{{ book.title|title }}{% endblock %}
+
+
+{%  block content %}
+
+<br>
+<br>
+<center>
+<div class="container">
+  <div class="card-header">
+    Title : {{ book.title|title }}<br>
+    Author : {{ book.author|title }}<br>
+    Edition : {{ book.edition }}
+  </div>
+
+  {% for i in book_model %}
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ i.title|title }}</h5>
+      <p class="card-text">Serial Number : {{ i.serialNumber }}</p>
+      {% if i.status %}
+        <a href="{%  url 'book_issue' i.serialNumber %}  " class="btn btn-primary">{{ i.status|statusFind }}</a>
+      {% else %}
+        <a href="#" class="btn btn-primary">{{ i.status|statusFind }}</a>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+
+</div>
+</center>
+
+{% endblock %}

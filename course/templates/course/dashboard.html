@@ -1,0 +1,85 @@
+{% extends "Base.html" %}
+
+
+{% load static %}
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+
+
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    
+  </style>
+
+<div class="container-fluid">
+    <div class="row">
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Dashboard</h1>
+          {% if request.user.is_superuser %}
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <a href="{% url 'user_create' %}">Create User Profile</a>
+          </div>
+          {% endif %}
+        </div>
+  
+
+  
+        <h2>User Information</h2>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Registration Name</th>
+                <th>Email</th>
+                <th>Contact Number</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {% for i in users %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td><a href="{% url 'inform' i.id %}">{{ i.username }}</a></td>
+                {% for j in profiles %}
+                  {% if i.id == j.user.id %}
+                    <td>{{ j.rollNo }}</td>
+                  {% endif %}
+                {% endfor %}
+                <td>{{ i.email }}</td>
+
+                {% for j in profiles %}
+                  {% if i.id == j.user.id %}
+                    <td>{{ j.contactNumber }}</td>
+                  {% endif %}
+                {% endfor %}
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+
+{% endblock %}
